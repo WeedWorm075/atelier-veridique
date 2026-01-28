@@ -15,7 +15,7 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             $table->string('transaction_id', 255)->nullable();
             $table->string('status', 50);
-            $table->json('metadata')->nullable();
+            $table->jsonb('metadata')->nullable();
             $table->timestamps();
             
             // Indexes

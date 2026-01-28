@@ -11,6 +11,8 @@ return new class extends Migration
         
         // Add GIN indexes for JSON columns
         if (DB::connection()->getDriverName() === 'pgsql') {
+            // First, ensure the column is jsonb (if it's not already)
+            DB::statement('ALTER TABLE payment_logs ALTER COLUMN metadata TYPE jsonb USING metadata::jsonb');
             DB::statement('CREATE INDEX payment_logs_metadata_gin_idx ON payment_logs USING GIN (metadata)');
             
             // Create text search indexes for better search performance
@@ -46,6 +48,8 @@ return new class extends Migration
             DB::statement('DROP INDEX IF EXISTS orders_customer_email_ci_idx');
             DB::statement('DROP INDEX IF EXISTS orders_active_idx');
             DB::statement('DROP INDEX IF EXISTS orders_created_at_brin_idx');
+             // Convert back to json if needed
+        DB::statement('ALTER TABLE payment_logs ALTER COLUMN metadata TYPE json USING metadata::json');
         }
     }
 };
