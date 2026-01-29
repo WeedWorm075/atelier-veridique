@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use App\Models\LeatherOption;
-use App\Models\HardwareOption;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function show($slug)
+    public function index()
     {
-        $product = Product::where('slug', $slug)
-            ->with(['leatherOptions', 'hardwareOptions'])
-            ->firstOrFail();
-            
-        return view('products.show', compact('product'));
+        return view('landing_page'); // Your existing landing page
+    }
+
+    public function showSatchel()
+    {
+        return view('products.satchel');
+    }
+    public function personalize()
+    {
+        return view('products.personalize'); 
     }
 }
