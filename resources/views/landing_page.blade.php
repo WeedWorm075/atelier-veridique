@@ -107,7 +107,7 @@
         </p>
         <div class="hero-buttons animate-in">
             <a href="{{ route('products.satchel') }}" class="btn-primary">Begin Your Journey</a>
-            <a href="{{ route('products.personalize') }}" class="btn-secondary">Start Customizing</a>
+            <a href="{{ route('reservation.personalize') }}" class="btn-secondary">Start Customizing</a>
         </div>
     </section>
     

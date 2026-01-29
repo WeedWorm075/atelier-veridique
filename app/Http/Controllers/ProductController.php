@@ -15,8 +15,4 @@ class ProductController extends Controller
     {
         return view('products.satchel');
     }
-    public function personalize()
-    {
-        return view('products.personalize'); 
-    }
 }

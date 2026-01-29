@@ -3,17 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class OrderStatusHistory extends Model
 {
-    use HasFactory;
+    // indique la table exacte qui existe dans Postgres
+    protected $table = 'order_status_history';
 
-    protected $fillable = [
-        'order_id',
-        'status',
-        'notes'
-    ];
+    // colonnes modifiables
+    protected $fillable = ['order_id', 'status', 'notes'];
+
+    // si tu veux, tu peux laisser les timestamps (created_at/updated_at)
+    public $timestamps = true;
 
     public function order()
     {

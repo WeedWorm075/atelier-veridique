@@ -832,7 +832,8 @@
                     </div>
                 </div>
                 
-                <form action="{{ route('checkout.confirmation') }}" method="POST">
+                <!-- <form action="{{ route('checkout.confirmation') }}" method="POST"> -->
+                <form action="{{ route('checkout.customization.store') }}" method="POST">
                     @csrf
                     <input type="hidden" name="leather" value="heritage">
                     <input type="hidden" name="hardware" value="antique">
