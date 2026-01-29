@@ -3,22 +3,23 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Laravel\Cashier\Cashier;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
-    public function register(): void
+    public function register()
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
+    public function boot()
     {
-        //
+        // Set default string length for PostgreSQL
+        \Illuminate\Support\Facades\Schema::defaultStringLength(191);
+        
+        // Register payment gateway if needed
+        if (config('services.stripe.key')) {
+            \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+        }
     }
 }

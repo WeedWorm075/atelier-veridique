@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier Véridique | Ethical Leather Goods</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FEFDF8;
+            color: #2C2416;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(180deg, rgba(254,253,248,0.95) 0%, rgba(254,253,248,0) 100%);
+        }
+        
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #2C2416;
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: #5A4A3A;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #2C2416;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #2C2416 0%, #4A3C2A 100%);
+            color: #FEFDF8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.2;
+            filter: grayscale(100%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+        
+        .hero-subtitle {
+            font-size: 0.95rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+        
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-description {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary, .btn-secondary {
+            padding: 1.2rem 3rem;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .btn-primary {
+            background: #D4AF77;
+            color: #2C2416;
+        }
+        
+        .btn-primary:hover {
+            background: #C19A66;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(212, 175, 119, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #FEFDF8;
+            border-color: #FEFDF8;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 8rem 2rem;
+            background: #FEFDF8;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 5rem;
+            color: #2C2416;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: #F5F2EA;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2C2416;
+        }
+        
+        .feature-description {
+            color: #5A4A3A;
+            line-height: 1.6;
+        }
+        
+        /* Product Preview */
+        .product-preview {
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, #F5F2EA 0%, #E8E2D1 100%);
+        }
+        
+        .product-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #2C2416 0%, #4A3C2A 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #D4AF77;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+        }
+        
+        .product-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #2C2416;
+        }
+        
+        .product-info p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #5A4A3A;
+            margin-bottom: 2rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 2rem;
+            background: #2C2416;
+            color: #FEFDF8;
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-description {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 4rem 2rem;
+            background: #F5F2EA;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-link {
+            color: #5A4A3A;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: #2C2416;
+        }
+        
+        .footer-copyright {
+            color: #8B7355;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav {
+                padding: 1rem 2rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="#" class="nav-logo">ATELIER VÉRIDIQUE</a>
+        <div class="nav-menu">
+            <a href="#story" class="nav-link">Our Story</a>
+            <a href="#craftsmanship" class="nav-link">Craftsmanship</a>
+            <a href="#transparency" class="nav-link">Transparency</a>
+            <a href="ethical_product_page.html" class="nav-link">The Satchel</a>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-video"></div>
+        <div class="hero-content">
+            <div class="hero-subtitle">Radical Transparency in Craftsmanship</div>
+            <h1 class="hero-title animate-in">Where Ethics Meet Artistry</h1>
+            <p class="hero-description animate-in">
+                Each piece tells a story of sustainable materials, fair artisan wages, 
+                and uncompromising quality. Discover leather goods that are built to last 
+                a lifetime, not just a season.
+            </p>
+            <div class="hero-buttons animate-in">
+                <a href="ethical_product_page.html" class="btn-primary">Explore The Satchel</a>
+                <a href="#story" class="btn-secondary">Discover Our Story</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features" id="story">
+        <h2 class="section-title animate-in">Our Commitments</h2>
+        <div class="features-grid">
+            <div class="feature-card animate-in">
+                <div class="feature-icon">🌱</div>
+                <h3 class="feature-title">Sustainable Materials</h3>
+                <p class="feature-description">
+                    100% vegetable-tanned leather from regenerative farms. No chrome, no toxins, 
+                    just pure natural beauty that ages gracefully.
+                </p>
+            </div>
+            
+            <div class="feature-card animate-in" style="animation-delay: 0.2s">
+                <div class="feature-icon">👐</div>
+                <h3 class="feature-title">Fair Artisan Wages</h3>
+                <p class="feature-description">
+                    40% of every purchase goes directly to our artisans, ensuring living wages 
+                    and preserving traditional craftsmanship for generations.
+                </p>
+            </div>
+            
+            <div class="feature-card animate-in" style="animation-delay: 0.4s">
+                <div class="feature-icon">🔧</div>
+                <h3 class="feature-title">Lifetime Guarantee</h3>
+                <p class="feature-description">
+                    Every piece comes with free lifetime repairs. We believe in creating 
+                    heirlooms, not disposable fashion.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Product Preview -->
+    <section class="product-preview" id="craftsmanship">
+        <div class="product-content">
+            <div class="product-image animate-in">
+                Handcrafted Excellence
+            </div>
+            <div class="product-info animate-in" style="animation-delay: 0.3s">
+                <h2>The Artisan Satchel</h2>
+                <p>
+                    Crafted over 18 hours by master artisans using techniques refined over 
+                    four decades. Each satchel features 3,847 hand stitches and develops 
+                    a unique patina that tells your story.
+                </p>
+                <p>
+                    From pasture to workshop, we illuminate every step of the journey. 
+                    Our Live Ledger shows exactly where every euro goes.
+                </p>
+                <div class="hero-buttons" style="justify-content: flex-start; margin-top: 2rem;">
+                    <a href="ethical_product_page.html" class="btn-primary">Discover the Journey</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section" id="transparency">
+        <h2 class="cta-title animate-in">Ready to Invest in Craftsmanship?</h2>
+        <p class="cta-description animate-in">
+            Join over 2,000 conscious customers who have chosen quality over quantity, 
+            ethics over expediency, and craftsmanship over mass production.
+        </p>
+        <div class="hero-buttons animate-in">
+            <a href="ethical_product_page.html" class="btn-primary">Begin Your Journey</a>
+            <a href="reservation_personalization.html" class="btn-secondary">Start Customizing</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#" class="footer-link">Our Story</a>
+            <a href="#" class="footer-link">Artisan Profiles</a>
+            <a href="#" class="footer-link">Sustainability Report</a>
+            <a href="#" class="footer-link">Contact</a>
+            <a href="#" class="footer-link">FAQ</a>
+        </div>
+        <p class="footer-copyright">
+            © 2024 Atelier Véridique. Handcrafted in France. Each piece tells a story.
+        </p>
+    </footer>
+    
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all elements with animate-in class
+            document.querySelectorAll('.animate-in').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.8s ease';
+                observer.observe(el);
+            });
+        });
+        
+        // Simple navigation toggle for mobile (if we add mobile menu later)
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        // This would be for a mobile menu toggle if we implement it
+        // For now, we keep it simple
+    </script>
+</body>
+</html>
