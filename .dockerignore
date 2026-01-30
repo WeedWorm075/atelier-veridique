@@ -3,6 +3,13 @@
 .DS_Store
 .env
 .env.local
+.env.production
+docker-compose.yml
+docker-compose.override.yml
+docker/
+README.md
+
+# Development files
 node_modules/
 vendor/
 storage/app/public/*
@@ -14,7 +21,7 @@ storage/framework/sessions/*
 storage/framework/views/*
 bootstrap/cache/*
 .phpunit.result.cache
-docker-compose.yml
-docker-compose.override.yml
-docker/
-README.md
+
+# Keep built assets
+!public/build/
+!public/hot

@@ -25,5 +25,9 @@ php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 
+# In production, we don't need dev dependencies, but if you want to build assets on the fly:
+# npm ci --no-audit --prefer-offline --production=false
+# npm run build
+
 echo "Starting Apache..."
 exec apache2-foreground
