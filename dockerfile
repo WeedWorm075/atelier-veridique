@@ -1,7 +1,21 @@
-# Use official PHP 8.2 image with Apache
+# Multi-stage build: Node for building assets, then PHP for runtime
+FROM node:18-alpine AS node
+
+WORKDIR /var/www/html
+
+# Copy package files
+COPY package.json package-lock.json* ./
+RUN npm ci --no-audit --prefer-offline
+
+# Copy all files for building assets
+COPY . .
+
+# Build assets
+RUN npm run build
+
+# PHP stage
 FROM php:8.2-apache
 
-# Set working directory
 WORKDIR /var/www/html
 
 # Install system dependencies
@@ -14,14 +28,20 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     zip \
     unzip \
+    nodejs \
+    npm \
     && docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath gd \
     && a2enmod rewrite
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy application files
+# Copy application files from current directory
 COPY . .
+
+# Copy built assets from node stage
+COPY --from=node /var/www/html/public/build /var/www/html/public/build
+COPY --from=node /var/www/html/node_modules /var/www/html/node_modules
 
 # Install PHP dependencies
 RUN composer install --no-interaction --optimize-autoloader --no-dev
@@ -35,17 +55,8 @@ RUN chown -R www-data:www-data /var/www/html/storage \
 # Copy Apache configuration
 COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
 
-# Generate key and optimize Laravel
-RUN php artisan key:generate --force \
-    && php artisan config:cache \
-    && php artisan route:cache \
-    && php artisan view:cache
-
 # Expose port
 EXPOSE 8080
-
-# Start Apache
-CMD ["apache2-foreground"]
 
 # Copy entrypoint script
 COPY entrypoint.sh /usr/local/bin/

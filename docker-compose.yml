@@ -5,11 +5,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: php  # Build only the PHP stage for development
     ports:
       - "8080:8080"
+    volumes:
+      - .:/var/www/html
+      - ./docker/apache.conf:/etc/apache2/sites-available/000-default.conf
     environment:
-      - APP_ENV=production
-      - APP_DEBUG=false
+      - APP_ENV=local
+      - APP_DEBUG=true
       - DB_HOST=postgres
       - DB_PORT=5432
       - DB_DATABASE=atelier_veridique
@@ -17,6 +21,24 @@ services:
       - DB_PASSWORD=ZgJnnZoxBnAwYU6G4zUF6P1Ds8OAL6ng
     depends_on:
       - postgres
+    networks:
+      - app-network
+
+  node:
+    image: node:18-alpine
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+      - /var/www/html/node_modules
+    command: sh -c "npm ci && npm run dev"
+    ports:
+      - "5173:5173"  # Vite dev server port
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - app
+    networks:
+      - app-network
 
   postgres:
     image: postgres:15
@@ -26,6 +48,14 @@ services:
       - POSTGRES_PASSWORD=ZgJnnZoxBnAwYU6G4zUF6P1Ds8OAL6ng
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
 
 volumes:
   postgres_data:
+
+networks:
+  app-network:
+    driver: bridge
