@@ -1,15 +1,15 @@
+# render.yaml
 services:
   - type: web
-    name: laravel-app
-    runtime: php
+    name: atelier-veridique
+    env: php
     buildCommand: |
-      composer install --no-dev --optimize-autoloader
+      composer install --no-interaction --optimize-autoloader --no-dev
+      php artisan storage:link
       php artisan config:cache
       php artisan route:cache
       php artisan view:cache
-      npm install --production
-      npm run build
-    startCommand: ./start.sh
+    startCommand: php artisan serve --host=0.0.0.0 --port=${PORT}
     envVars:
       - key: APP_ENV
         value: production
@@ -17,11 +17,5 @@ services:
         value: false
       - key: LOG_CHANNEL
         value: stderr
-      - key: APP_LOG_LEVEL
-        value: error
-      - key: DB_CONNECTION
-        value: pgsql
-      - fromDatabase:
-          name: laravel-db
-          property: connectionString
-        key: DATABASE_URL
+      - key: LOG_LEVEL
+        value: warning
