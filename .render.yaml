@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: laravel-app
+    runtime: php
+    buildCommand: |
+      composer install --no-dev --optimize-autoloader
+      php artisan config:cache
+      php artisan route:cache
+      php artisan view:cache
+      npm install --production
+      npm run build
+    startCommand: ./start.sh
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: APP_LOG_LEVEL
+        value: error
+      - key: DB_CONNECTION
+        value: pgsql
+      - fromDatabase:
+          name: laravel-db
+          property: connectionString
+        key: DATABASE_URL
